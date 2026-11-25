@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Elvis Browser - one link for any chat AI</title>
+<style>
+body{font:16px system-ui,sans-serif;background:#0f1115;color:#eee;margin:0;padding:16px;max-width:820px;margin:auto}
+h1{font-size:22px}h2{font-size:18px;margin-top:28px}
+a{color:#8ab4ff}.card{background:#181b22;border:1px solid #2a2f3a;border-radius:10px;padding:12px;margin:10px 0}
+textarea{width:100%;height:340px;background:#0b0d11;color:#dfe;border:1px solid #333;border-radius:8px;padding:8px;font:13px monospace;box-sizing:border-box}
+button{font-size:16px;padding:10px 14px;border-radius:8px;border:0;background:#4c7dff;color:#fff;margin:6px 0}
+small{color:#9aa}
+</style></head><body>
+<h1>Elvis Browser</h1>
+<p>One real browser on Abhay's VPS. Any chat AI that can open a link (or that you paste the prompt into) can browse, click, type and read pages through it.</p>
+
+<h2>1. Watch and control it yourself</h2>
+<div class="card">
+<a href="https://linktest.187-127-132-18.sslip.io/t/live">Live control</a> (continuous view, tap to click) &middot;
+<a href="https://linktest.187-127-132-18.sslip.io/room">Room</a> (phone friendly, type box) &middot;
+<a href="https://linktest.187-127-132-18.sslip.io/t/ui">5s snapshot</a>
+</div>
+
+<h2>2. Elvis agent (type a task, it uses the browser)</h2>
+<div class="card"><a href="https://agent.187-127-132-18.sslip.io/">agent.187-127-132-18.sslip.io</a> &middot; desktop view: <a href="https://sandbox.187-127-132-18.sslip.io/">sandbox browser</a></div>
+
+<h2>3. Give any chat AI browser power</h2>
+<p>Paste this into the chat AI. It must be able to open web links.</p>
+<textarea id="p" readonly>You can control a real remote web browser using plain links. Base: https://linktest.187-127-132-18.sslip.io
+Open each link yourself and read the reply. Every action returns "Action #N done"; then read the result at /t/result?id=N (text) or /t/result?id=N&fmt=png (screenshot).
+Main links:
+- /t/goto?url=URL  open a page (URL-encode it)
+- /t/snap  take a screenshot
+- /t/click?x=N&y=N  click at coordinates
+- /t/nodes?sel=CSS  list up to 20 matching elements as JSON with index i, tag t, x, y, text txt
+- /t/selclick?sel=CSS&i=N  click a matching element
+- /t/seltype?sel=CSS&text=TXT&enter=1  type into a field (1-200 chars)
+- /t/q?sel=CSS&get=text|count|url|title  read page state
+- /t/peek  short text summary of the current page
+- /t/html?sel=CSS  page structure (max 20000 chars)
+- /t/waitfor?sel=CSS&ms=N  wait for an element (max 10000 ms)
+- /t/back /t/reload /t/waitms?ms=N
+- /t/batch?steps=JSON  up to 10 steps in one call
+Limits: roughly 10 queued actions per hour and 30 selector reads per hour per IP, public pages only, no logins, one shared browser (others may see it). Work in small steps: goto, then peek or nodes, then click or type, then peek again. Tell the user what you did and what you found.</textarea><br>
+<button onclick="p.select();document.execCommand('copy');this.textContent='Copied'">Copy prompt</button>
+<p><small>Shared open demo browser: no password, empty profile, no saved logins. Do not type passwords or personal data into it.</small></p>
+</body></html>
